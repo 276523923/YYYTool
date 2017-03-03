@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "YYYTool"
-  s.version      = "0.0.6"
+  s.version      = "1.0.0"
   s.summary      = "YYYTool"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.homepage     = "https://github.com/276523923/YYYTool.git"
@@ -24,9 +24,20 @@ YYYTool 常用工具
   end
 
   s.subspec 'Category' do |category|
-    category.dependency 'YYYTool/Helper'
-    category.public_header_files = "YYYTool/Category/**/*.{h}"
-    category.source_files  ="YYYTool/Category/**/*.{m,h}"
+
+    category.subspec 'Foundation' do|fo|
+      fo.dependency 'YYYTool/Helper'
+      fo.public_header_files = "YYYTool/Category/Foundation/*.{h}"
+      fo.source_files  ="YYYTool/Category/Foundation/*.{m,h}"
+    end
+
+    category.subspec 'UIKit' do|kit|
+      kit.dependency 'YYYTool/Helper'
+      kit.dependency 'YYYTool/Category/Foundation'
+      kit.public_header_files = "YYYTool/Category/UIKit/*.{h}"
+      kit.source_files  ="YYYTool/Category/UIKit/*.{m,h}"
+    end
+
   end
 
 end
