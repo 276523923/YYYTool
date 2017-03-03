@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "684C25021E68214800D60D82"
+               BlueprintIdentifier = "684C26631E69204C00D60D82"
                BuildableName = "YYYToolDemo.app"
                BlueprintName = "YYYToolDemo"
                ReferencedContainer = "container:YYYToolDemo.xcodeproj">
@@ -28,31 +28,11 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "684C251B1E68214800D60D82"
-               BuildableName = "YYYToolDemoTests.xctest"
-               BlueprintName = "YYYToolDemoTests"
-               ReferencedContainer = "container:YYYToolDemo.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "684C25261E68214800D60D82"
-               BuildableName = "YYYToolDemoUITests.xctest"
-               BlueprintName = "YYYToolDemoUITests"
-               ReferencedContainer = "container:YYYToolDemo.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "684C25021E68214800D60D82"
+            BlueprintIdentifier = "684C26631E69204C00D60D82"
             BuildableName = "YYYToolDemo.app"
             BlueprintName = "YYYToolDemo"
             ReferencedContainer = "container:YYYToolDemo.xcodeproj">
@@ -75,7 +55,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "684C25021E68214800D60D82"
+            BlueprintIdentifier = "684C26631E69204C00D60D82"
             BuildableName = "YYYToolDemo.app"
             BlueprintName = "YYYToolDemo"
             ReferencedContainer = "container:YYYToolDemo.xcodeproj">
@@ -94,7 +74,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "684C25021E68214800D60D82"
+            BlueprintIdentifier = "684C26631E69204C00D60D82"
             BuildableName = "YYYToolDemo.app"
             BlueprintName = "YYYToolDemo"
             ReferencedContainer = "container:YYYToolDemo.xcodeproj">

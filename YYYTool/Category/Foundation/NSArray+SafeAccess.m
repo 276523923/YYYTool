@@ -7,7 +7,7 @@
 //
 
 #import "NSArray+SafeAccess.h"
-#import "UtilMethod.h"
+
 @implementation NSArray (SafeAccess)
 -(id)objAtIndex:(NSUInteger)index{
     if (index <self.count) {
@@ -33,7 +33,19 @@
 - (NSString*)stringWithIndex:(NSUInteger)index
 {
     id value = [self objAtIndex:index];
-    return StringObj(value);
+    if ([value isKindOfClass:[NSString class]])
+    {
+        return value;
+    }
+    if ([value respondsToSelector:@selector(stringValue)])
+    {
+        return [value stringValue];
+    }
+    if ([value respondsToSelector:@selector(string)])
+    {
+        return [value string];
+    }
+    return nil;
 }
 
 - (NSNumber*)numberWithIndex:(NSUInteger)index

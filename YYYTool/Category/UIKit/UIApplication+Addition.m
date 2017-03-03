@@ -12,7 +12,6 @@
 #import <UserNotifications/UserNotifications.h>
 #import "CommonMacro.h"
 #import "NSString+Addition.h"
-#import "UtilMethod.h"
 
 @implementation UIApplication (Addition)
 
@@ -125,8 +124,7 @@
 
 + (void)callPhoneWithNum:(NSString *)num
 {
-    if (IsEmptyObj(num))
-    {
+    if (num == nil || ![num isKindOfClass:[NSString class]] || num.length == 0) {
         return;
     }
     num = [num stringByDeletingString:@"-"];

@@ -8,7 +8,6 @@
 
 #import "NSDictionary+SafeAccess.h"
 #import "NSObject+Addition.h"
-#import "UtilMethod.h"
 
 @implementation NSDictionary (SafeAccess)
 - (BOOL)hasKey:(NSString *)key
@@ -19,7 +18,19 @@
 - (NSString*)stringForKey:(id)key
 {
     id value = [self objectForKey:key];
-    return StringObj(value);
+    if ([value isKindOfClass:[NSString class]])
+    {
+        return value;
+    }
+    if ([value respondsToSelector:@selector(stringValue)])
+    {
+        return [value stringValue];
+    }
+    if ([value respondsToSelector:@selector(string)])
+    {
+        return [value string];
+    }
+    return nil;
 }
 
 - (NSNumber*)numberForKey:(id)key
@@ -299,8 +310,13 @@
 }
 -(void)setString:(NSString*)i forKey:(NSString*)key;
 {
-    i = StringObj(i);
-    [self setValue:i forKey:key];
+    if (i == nil || ![i isKindOfClass:[NSString class]]) {
+        [self removeObjectForKey:key];
+    }
+    else
+    {
+        [self setValue:i forKey:key];
+    }
 }
 -(void)setBool:(BOOL)i forKey:(NSString *)key
 {

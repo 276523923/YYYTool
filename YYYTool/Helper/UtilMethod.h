@@ -9,8 +9,6 @@
 #ifndef UtilMethod_h
 #define UtilMethod_h
 #import <UIKit/UIKit.h>
-#import "MsgSend.h"
-
 /**
  判断是否为空对象,NSNull,NSArray count = 0,NSDictionary count = 0,NSString length = 0,都为空
  */
