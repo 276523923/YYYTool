@@ -149,9 +149,9 @@ BOOL BOOLValue(id obj){
 }
 
 UIFont *FONT(CGFloat size){
-    return [UIFont systemFontOfSize:iPhone6P?size+1:size];
+    return [UIFont systemFontOfSize:size];
 }
 
 UIFont *BOLDFONT(CGFloat size){
-    return [UIFont boldSystemFontOfSize:iPhone6P?size+1:size];
+    return [UIFont boldSystemFontOfSize:size];
 }
