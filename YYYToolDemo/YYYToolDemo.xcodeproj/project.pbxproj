@@ -13,6 +13,7 @@
 		684C26721E69204C00D60D82 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 684C26701E69204C00D60D82 /* Main.storyboard */; };
 		684C26741E69204C00D60D82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 684C26731E69204C00D60D82 /* Assets.xcassets */; };
 		684C26771E69204C00D60D82 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 684C26751E69204C00D60D82 /* LaunchScreen.storyboard */; };
+		A77A0D6C1E9F143F00C53B66 /* YYYTool.podspec in Resources */ = {isa = PBXBuildFile; fileRef = A77A0D6B1E9F143F00C53B66 /* YYYTool.podspec */; };
 		A7B01A001E767560003A30CD /* YYYTool in Resources */ = {isa = PBXBuildFile; fileRef = A7B019FF1E767560003A30CD /* YYYTool */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		684C26731E69204C00D60D82 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		684C26761E69204C00D60D82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		684C26781E69204C00D60D82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A77A0D6B1E9F143F00C53B66 /* YYYTool.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = YYYTool.podspec; path = ../YYYTool.podspec; sourceTree = "<group>"; };
 		A7B019FF1E767560003A30CD /* YYYTool */ = {isa = PBXFileReference; lastKnownFileType = folder; name = YYYTool; path = ../YYYTool; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -44,6 +46,7 @@
 		684C265B1E69204C00D60D82 = {
 			isa = PBXGroup;
 			children = (
+				A77A0D6B1E9F143F00C53B66 /* YYYTool.podspec */,
 				A7B019FF1E767560003A30CD /* YYYTool */,
 				684C26661E69204C00D60D82 /* YYYToolDemo */,
 				684C26651E69204C00D60D82 /* Products */,
@@ -141,6 +144,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A77A0D6C1E9F143F00C53B66 /* YYYTool.podspec in Resources */,
 				A7B01A001E767560003A30CD /* YYYTool in Resources */,
 				684C26771E69204C00D60D82 /* LaunchScreen.storyboard in Resources */,
 				684C26741E69204C00D60D82 /* Assets.xcassets in Resources */,
