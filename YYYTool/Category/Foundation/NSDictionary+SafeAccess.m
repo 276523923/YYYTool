@@ -304,8 +304,16 @@
 #pragma --mark NSMutableDictionary setter
 @implementation NSMutableDictionary (SafeAccess)
 -(void)setObj:(id)i forKey:(NSString*)key{
-    if (i!=nil && key != nil) {
-        self[key] = i;
+    if (!key) {
+        return;
+    }
+    if (i)
+    {
+        [self setObject:i forKey:key];
+    }
+    else
+    {
+        [self removeObjectForKey:key];
     }
 }
 -(void)setString:(NSString*)i forKey:(NSString*)key;

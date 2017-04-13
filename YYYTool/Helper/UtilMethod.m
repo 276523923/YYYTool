@@ -155,3 +155,21 @@ UIFont *FONT(CGFloat size){
 UIFont *BOLDFONT(CGFloat size){
     return [UIFont boldSystemFontOfSize:iPhone6P?size+1:size];
 }
+
+CGFloat iPhone6AndUperValue(CGFloat iPhone6UpValue,CGFloat iPhone5Value){
+    return iphone6AndUper? iPhone6UpValue:iPhone5Value;
+}
+
+CGFloat iPhoneValue(CGFloat iP5,CGFloat iP6,CGFloat iP6P){
+    if (iPhone6) {
+        return iP6;
+    }
+    else if (iPhone6P)
+    {
+        return iP6P;
+    }
+    else
+    {
+        return iP5;
+    }
+}

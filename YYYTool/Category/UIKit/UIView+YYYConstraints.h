@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UIView (YYYConstraints)
+@property (nonatomic, assign) BOOL isSetupConstraints;
 
 /**
  可以在这边添加子View的约束，这个会在第一次调用updateConstraints的时候执行一次。

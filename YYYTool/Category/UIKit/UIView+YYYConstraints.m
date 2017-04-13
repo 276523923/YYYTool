@@ -11,7 +11,6 @@
 #import "NSObject+Addition.h"
 
 @interface UIView ()
-@property (nonatomic, assign) BOOL isSetupConstraints;
 @end
 
 @implementation UIView (YYYConstraints)

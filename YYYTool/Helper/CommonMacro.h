@@ -108,19 +108,19 @@
 /**
  *  (640, 960)的屏幕
  */
-#define iPhone4 CGSizeEqualToSize(CGSizeMake(320, 480), [[UIScreen mainScreen] currentMode].size)
+#define iPhone4 CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size)
 /**
- *  (640, 1136)的屏幕
+ *  (640, 1136)的屏幕·
  */
-#define iPhone5 CGSizeEqualToSize(CGSizeMake(320, 480), [[UIScreen mainScreen] currentMode].size)
+#define iPhone5 CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size)
 /**
  *  (750, 1334)的屏幕
  */
-#define iPhone6 CGSizeEqualToSize(CGSizeMake(320, 480), [[UIScreen mainScreen] currentMode].size)
+#define iPhone6 CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size)
 /**
  *  (1242, 2208)的屏幕
  */
-#define iPhone6P CGSizeEqualToSize(CGSizeMake(320, 480), [[UIScreen mainScreen] currentMode].size)
+#define iPhone6P CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size)
 
 //iphone6及以上手机
 #define iphone6AndUper ([[UIScreen mainScreen] currentMode].size.width > 640)
@@ -132,7 +132,7 @@
 #define kDeviceBoundsHeight [[UIScreen mainScreen] bounds].size.height
 #define kDeviceBoundsWidth [[UIScreen mainScreen] bounds].size.width
 
-#define iPhone6RatioOfHeight(value) kDeviceBoundsWidth / 375.f * value
+#define iPhone6RatioForWidth(value) kDeviceBoundsWidth / 375.f * value
 
 #define kStatushHeight 20
 #define kTabbarHeight 49
