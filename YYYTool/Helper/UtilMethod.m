@@ -51,6 +51,12 @@ BOOL NotEmptyArray(id array)
 }
 
 id DefaultObj(id obj,id defaultValue){
+    if (obj == nil) {
+        return defaultValue;
+    }
+    if (defaultValue == nil) {
+        return obj;
+    }
     Class cls ;
     if ([defaultValue isKindOfClass:[NSString class]])
     {
@@ -122,6 +128,17 @@ __attribute((overloadable)) NSString *StringObj(id obj,NSString *defaultString){
     return defaultString;
 }
 
+NSString *StringNum(id obj){
+    if (obj == nil) {
+        return @"0";
+    }
+    if ([obj isKindOfClass:[NSNumber class]])
+    {
+        return [obj stringValue];
+    }
+    return @"0";
+}
+
 BOOL BOOLValue(id obj){
     if (IsEmptyObj(obj))
     {
@@ -158,6 +175,10 @@ UIFont *BOLDFONT(CGFloat size){
 
 CGFloat iPhone6AndUperValue(CGFloat iPhone6UpValue,CGFloat iPhone5Value){
     return iphone6AndUper? iPhone6UpValue:iPhone5Value;
+}
+
+UIFont *LIGHTFONT(CGFloat size){
+    return [UIFont fontWithName:@"PingFangSC-Light" size:iPhone6P?size+1:size];
 }
 
 CGFloat iPhoneValue(CGFloat iP5,CGFloat iP6,CGFloat iP6P){

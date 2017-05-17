@@ -130,7 +130,15 @@
     num = [num stringByDeletingString:@"-"];
     num = [num stringByDeletingString:@"－"];
     NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",num];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+    if (ios10AndUper)
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str] options:nil completionHandler:nil];
+
+    }
+    else
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+    }
 }
 
 + (NSInteger)getNetworkState

@@ -36,6 +36,8 @@ extern __attribute((overloadable)) NSString *StringObj(id obj);
  */
 extern __attribute((overloadable)) NSString *StringObj(id obj,NSString *defaultString);
 
+extern NSString *StringNum(id obj);
+
 /**
  obj 转布尔值
  */
@@ -44,6 +46,6 @@ extern BOOL BOOLValue(id obj);
 
 extern UIFont *FONT(CGFloat size);
 extern UIFont *BOLDFONT(CGFloat size);
-
+extern UIFont *LIGHTFONT(CGFloat size);
 
 #endif /* UtilMethod_h */
