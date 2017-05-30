@@ -16,7 +16,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional  wefwe setup after loading the view, typically from a nib.
+    NSLog(@"111");
+    // Do any additional  wefwe 111 setup after loading the view, typically from a nib.
 }
 
 
