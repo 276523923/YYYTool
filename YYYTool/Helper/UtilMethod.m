@@ -9,6 +9,7 @@
 #import "UtilMethod.h"
 #import <objc/message.h>
 #import "CommonMacro.h"
+#import "NSDate+Helper.h"
 
 BOOL IsEmptyObj(id obj){
     if (obj == nil)
@@ -112,10 +113,7 @@ __attribute((overloadable)) NSString *StringObj(id obj,NSString *defaultString){
     }
     if ([obj isKindOfClass:[NSDate class]])
     {
-        NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
-        [outputFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        NSString *timestamp_str = [outputFormatter stringFromDate:obj];
-        return timestamp_str;
+        return [obj stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
     }
     if ([obj respondsToSelector:@selector(string)])
     {

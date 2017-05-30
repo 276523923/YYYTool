@@ -371,6 +371,8 @@ static __attribute__((always_inline)) NSDate *YYNSDateFromString(__unsafe_unreta
 + (NSDate *)dateFromString:(NSString *)string withFormat:(NSString *)format {
     NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
     [inputFormatter setDateFormat:format];
+    inputFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+    inputFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
     NSDate *date = [inputFormatter dateFromString:string];
     return date;
 }
