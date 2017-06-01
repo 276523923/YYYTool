@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "YYYTool"
-  s.version      = "1.0.3"
+  s.version      = "1.0.4"
   s.summary      = "YYYTool"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.homepage     = "https://github.com/276523923/YYYTool.git"

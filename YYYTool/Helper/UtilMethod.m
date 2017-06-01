@@ -91,10 +91,6 @@ __attribute((overloadable)) NSString *StringObj(id obj){
 }
 
 __attribute((overloadable)) NSString *StringObj(id obj,NSString *defaultString){
-    if ([obj isKindOfClass:[NSString class]])
-    {
-        return obj;
-    }
     if (IsEmptyObj(defaultString))
     {
         defaultString = @"";
@@ -102,6 +98,10 @@ __attribute((overloadable)) NSString *StringObj(id obj,NSString *defaultString){
     if (IsEmptyObj(obj))
     {
         return defaultString;
+    }
+    if ([obj isKindOfClass:[NSString class]])
+    {
+        return obj;
     }
     if ([obj isKindOfClass:[NSNumber class]])
     {
