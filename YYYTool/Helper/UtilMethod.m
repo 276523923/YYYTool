@@ -10,6 +10,7 @@
 #import <objc/message.h>
 #import "CommonMacro.h"
 #import "NSDate+Helper.h"
+#import "UIDevice+Addition.h"
 
 BOOL IsEmptyObj(id obj){
     if (obj == nil)
@@ -172,14 +173,22 @@ UIFont *BOLDFONT(CGFloat size){
 }
 
 CGFloat iPhone6AndUperValue(CGFloat iPhone6UpValue,CGFloat iPhone5Value){
-    return iphone6AndUper? iPhone6UpValue:iPhone5Value;
+    return iPhoneFloatValue(iPhone5Value, iPhone6UpValue, iPhone6UpValue);
 }
 
 UIFont *LIGHTFONT(CGFloat size){
-    return [UIFont fontWithName:@"PingFangSC-Light" size:iPhone6P?size+1:size];
+    return  ios9AndUper? [UIFont fontWithName:@"PingFangSC-Light" size:iPhone6P?size+1:size]:FONT(size);
 }
 
-CGFloat iPhoneValue(CGFloat iP5,CGFloat iP6,CGFloat iP6P){
+__attribute((overloadable)) CGFloat iPhoneFloatValue(CGFloat iPhone6UpValue,CGFloat iPhone5Value){
+    return iPhoneFloatValue(iPhone5Value, iPhone6UpValue, iPhone6UpValue);
+}
+
+__attribute((overloadable)) CGFloat iPhoneFloatValue(CGFloat iP5,CGFloat iP6,CGFloat iP6P){
+    return [iPhoneIDValue(@(iP5), @(iP6), @(iP6P)) doubleValue];
+}
+
+id iPhoneIDValue(id iP5,id iP6,id iP6P){
     if (iPhone6) {
         return iP6;
     }

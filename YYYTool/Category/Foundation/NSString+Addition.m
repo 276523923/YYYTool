@@ -17,15 +17,15 @@
 //判断是否时整形
 - (BOOL)isPureInt
 {
-    NSScanner* scan = [NSScanner scannerWithString:self]; 
-    int val; 
+    NSScanner* scan = [NSScanner scannerWithString:self];
+    int val;
     return[scan scanInt:&val] && [scan isAtEnd];
 }
 
 //判断是否为浮点形
 - (BOOL)isPureFloat
 {
-    NSScanner* scan = [NSScanner scannerWithString:self]; 
+    NSScanner* scan = [NSScanner scannerWithString:self];
     double val;
     return[scan scanDouble:&val] && [scan isAtEnd];
 }
@@ -33,15 +33,15 @@
 //分割字符串
 - (NSArray *)splitWithString:(NSString*)y
 {
-	return [self componentsSeparatedByString:y];
+    return [self componentsSeparatedByString:y];
 }
 
 //去掉首尾空白符
 - (NSString *)trim
 {
-	NSCharacterSet* seperator = [NSCharacterSet whitespaceAndNewlineCharacterSet];
-	NSString* y = [self stringByTrimmingCharactersInSet:seperator];
-	return y;
+    NSCharacterSet* seperator = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    NSString* y = [self stringByTrimmingCharactersInSet:seperator];
+    return y;
 }
 
 //校验用户邮箱格式，调用之前需要去掉首尾空白
@@ -91,7 +91,7 @@
 //去掉sub字符串
 - (NSString *)stringByDeletingString:(NSString *)sub
 {
-	return [self stringByReplacingOccurrencesOfString:sub withString:@""];
+    return [self stringByReplacingOccurrencesOfString:sub withString:@""];
 }
 
 #pragma mark - MD5 -
@@ -99,14 +99,14 @@
 //md5
 - (NSString *)md5
 {
-	const char *cStr = [self UTF8String];
-	unsigned char result[CC_MD5_DIGEST_LENGTH];
-	CC_MD5( cStr, (CC_LONG)strlen(cStr), result );
+    const char *cStr = [self UTF8String];
+    unsigned char result[CC_MD5_DIGEST_LENGTH];
+    CC_MD5( cStr, (CC_LONG)strlen(cStr), result );
     NSString * md5String = [NSString stringWithFormat:
-			@"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
-			result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7],
-			result[8], result[9], result[10], result[11], result[12], result[13], result[14], result[15]
-			];
+                            @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
+                            result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7],
+                            result[8], result[9], result[10], result[11], result[12], result[13], result[14], result[15]
+                            ];
     return [md5String uppercaseString];
 }
 
@@ -195,6 +195,10 @@
 
 - (CGSize)FLsizeWithFont:(UIFont *)font constrainedToSize:(CGSize)size lineBreakMode:(NSLineBreakMode)lineBreakMode maxLine:(NSUInteger)line
 {
+    if (!font)
+    {
+        return CGSizeZero;
+    }
     static NSCache *sizeCache = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -212,12 +216,15 @@
     CGSize rsize = [self boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:font, NSParagraphStyleAttributeName:para} context:nil].size;
     if (line > 0)
     {
-        CGSize temSize = [@"计算高度" boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:font, NSParagraphStyleAttributeName:para} context:nil].size;
-        rsize.height = MIN(rsize.height, temSize.height * line);
+        rsize.height = MIN(rsize.height, font.lineHeight * line);
     }
     rsize.width = ceil(rsize.width);
     rsize.height = ceil(rsize.height);
-    [sizeCache setObject:[NSValue valueWithCGSize:rsize] forKey:key];
+    NSValue *value = [NSValue valueWithCGSize:rsize];
+    if (value)
+    {
+        [sizeCache setObject:value forKey:key];
+    }
     return rsize;
 }
 

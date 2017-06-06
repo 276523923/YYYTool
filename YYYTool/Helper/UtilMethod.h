@@ -47,5 +47,9 @@ extern BOOL BOOLValue(id obj);
 extern UIFont *FONT(CGFloat size);
 extern UIFont *BOLDFONT(CGFloat size);
 extern UIFont *LIGHTFONT(CGFloat size);
+extern __attribute((overloadable)) CGFloat iPhoneFloatValue(CGFloat iPhone6UpValue,CGFloat iPhone5Value);
+extern __attribute((overloadable)) CGFloat iPhoneFloatValue(CGFloat iP5,CGFloat iP6,CGFloat iP6P);
+extern id iPhoneIDValue(id iP5,id iP6,id iP6P);
+
 
 #endif /* UtilMethod_h */
