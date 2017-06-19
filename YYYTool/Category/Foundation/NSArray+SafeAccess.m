@@ -80,10 +80,6 @@
 - (NSArray*)arrayWithIndex:(NSUInteger)index
 {
     id value = [self objAtIndex:index];
-    if (value == nil || value == [NSNull null])
-    {
-        return nil;
-    }
     if ([value isKindOfClass:[NSArray class]])
     {
         return value;
@@ -95,10 +91,6 @@
 - (NSDictionary*)dictionaryWithIndex:(NSUInteger)index
 {
     id value = [self objAtIndex:index];
-    if (value == nil || value == [NSNull null])
-    {
-        return nil;
-    }
     if ([value isKindOfClass:[NSDictionary class]])
     {
         return value;
@@ -109,10 +101,6 @@
 - (NSInteger)integerWithIndex:(NSUInteger)index
 {
     id value = [self objAtIndex:index];
-    if (value == nil || value == [NSNull null])
-    {
-        return 0;
-    }
     if ([value isKindOfClass:[NSString class]] || [value isKindOfClass:[NSNumber class]])
     {
         return [value integerValue];
@@ -122,10 +110,6 @@
 - (NSUInteger)unsignedIntegerWithIndex:(NSUInteger)index
 {
     id value = [self objAtIndex:index];
-    if (value == nil || value == [NSNull null])
-    {
-        return 0;
-    }
     if ([value isKindOfClass:[NSString class]] || [value isKindOfClass:[NSNumber class]])
     {
         return [value unsignedIntegerValue];
@@ -135,7 +119,6 @@
 - (BOOL)boolWithIndex:(NSUInteger)index
 {
     id value = [self objAtIndex:index];
-    
     if (value == nil || value == [NSNull null])
     {
         return NO;
@@ -278,37 +261,50 @@
 //CG
 - (CGFloat)CGFloatWithIndex:(NSUInteger)index
 {
-    id value = [self objAtIndex:index];
-    
-    CGFloat f = [value doubleValue];
-    
-    return f;
+    return [[self numberWithIndex:index] doubleValue];
 }
 
 - (CGPoint)pointWithIndex:(NSUInteger)index
 {
     id value = [self objAtIndex:index];
-
-    CGPoint point = CGPointFromString(value);
-    
-    return point;
+    if ([value isKindOfClass:[NSValue class]])
+    {
+        return [value CGPointValue];
+    }
+    else if ([value isKindOfClass:[NSString class]])
+    {
+        return CGPointFromString(value);
+    }
+    return CGPointZero;
 }
+
 - (CGSize)sizeWithIndex:(NSUInteger)index
 {
     id value = [self objAtIndex:index];
-
-    CGSize size = CGSizeFromString(value);
-    
-    return size;
+    if ([value isKindOfClass:[NSValue class]])
+    {
+        return [value CGSizeValue];
+    }
+    else if ([value isKindOfClass:[NSString class]])
+    {
+        return CGSizeFromString(value);
+    }
+    return CGSizeZero;
 }
 - (CGRect)rectWithIndex:(NSUInteger)index
 {
     id value = [self objAtIndex:index];
-    
-    CGRect rect = CGRectFromString(value);
-    
-    return rect;
+    if ([value isKindOfClass:[NSValue class]])
+    {
+        return [value CGRectValue];
+    }
+    else if ([value isKindOfClass:[NSString class]])
+    {
+        return CGRectFromString(value);
+    }
+    return CGRectNull;
 }
+
 @end
 
 
@@ -355,15 +351,15 @@
 }
 -(void)addPoint:(CGPoint)o
 {
-    [self addObject:NSStringFromCGPoint(o)];
+    [self addObj:[NSValue valueWithCGPoint:o]];
 }
 -(void)addSize:(CGSize)o
 {
-   [self addObject:NSStringFromCGSize(o)];
+    [self addObj:[NSValue valueWithCGSize:o]];
 }
 -(void)addRect:(CGRect)o
 {
-    [self addObject:NSStringFromCGRect(o)];
+    [self addObj:[NSValue valueWithCGRect:o]];
 }
 @end
 

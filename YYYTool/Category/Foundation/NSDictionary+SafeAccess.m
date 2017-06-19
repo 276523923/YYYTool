@@ -286,18 +286,43 @@
 
 - (CGPoint)pointForKey:(id)key
 {
-    CGPoint point = CGPointFromString(self[key]);
-    return point;
+    id value = [self objectForKey:key];
+    if ([value isKindOfClass:[NSValue class]])
+    {
+        return [value CGPointValue];
+    }
+    else if ([value isKindOfClass:[NSString class]])
+    {
+        return CGPointFromString(value);
+    }
+    return CGPointZero;
 }
 - (CGSize)sizeForKey:(id)key
 {
-    CGSize size = CGSizeFromString(self[key]);
-    return size;
+    id value = [self objectForKey:key];
+    if ([value isKindOfClass:[NSValue class]])
+    {
+        return [value CGSizeValue];
+    }
+    else if ([value isKindOfClass:[NSString class]])
+    {
+        return CGSizeFromString(value);
+    }
+    return CGSizeZero;
+
 }
 - (CGRect)rectForKey:(id)key
 {
-    CGRect rect = CGRectFromString(self[key]);
-    return rect;
+    id value = [self objectForKey:key];
+    if ([value isKindOfClass:[NSValue class]])
+    {
+        return [value CGRectValue];
+    }
+    else if ([value isKindOfClass:[NSString class]])
+    {
+        return CGRectFromString(value);
+    }
+    return CGRectNull;
 }
 @end
 
@@ -328,48 +353,48 @@
 }
 -(void)setBool:(BOOL)i forKey:(NSString *)key
 {
-    self[key] = @(i);
+    [self setObj:@(i) forKey:key];
 }
 -(void)setInt:(int)i forKey:(NSString *)key
 {
-    self[key] = @(i);
+    [self setObj:@(i) forKey:key];
 }
 -(void)setInteger:(NSInteger)i forKey:(NSString *)key
 {
-    self[key] = @(i);
+    [self setObj:@(i) forKey:key];
 }
 -(void)setUnsignedInteger:(NSUInteger)i forKey:(NSString *)key
 {
-    self[key] = @(i);
+    [self setObj:@(i) forKey:key];
 }
 -(void)setCGFloat:(CGFloat)f forKey:(NSString *)key
 {
-    self[key] = @(f);
+    [self setObj:@(f) forKey:key];
 }
 -(void)setChar:(char)c forKey:(NSString *)key
 {
-    self[key] = @(c);
+    [self setObj:@(c) forKey:key];
 }
 -(void)setFloat:(float)i forKey:(NSString *)key
 {
-    self[key] = @(i);
+    [self setObj:@(i) forKey:key];
 }
 -(void)setDouble:(double)i forKey:(NSString*)key{
-    self[key] = @(i);
+    [self setObj:@(i) forKey:key];
 }
 -(void)setLongLong:(long long)i forKey:(NSString*)key{
-    self[key] = @(i);
+    [self setObj:@(i) forKey:key];
 }
 -(void)setPoint:(CGPoint)o forKey:(NSString *)key
 {
-    self[key] = NSStringFromCGPoint(o);
+    [self setObj:[NSValue valueWithCGPoint:o] forKey:key];
 }
 -(void)setSize:(CGSize)o forKey:(NSString *)key
 {
-    self[key] = NSStringFromCGSize(o);
+    [self setObj:[NSValue valueWithCGSize:o] forKey:key];
 }
 -(void)setRect:(CGRect)o forKey:(NSString *)key
 {
-    self[key] = NSStringFromCGRect(o);
+    [self setObj:[NSValue valueWithCGRect:o] forKey:key];
 }
 @end
