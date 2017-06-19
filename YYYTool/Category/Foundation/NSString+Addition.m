@@ -10,6 +10,7 @@
 #import <CommonCrypto/CommonDigest.h>
 #import <CoreFoundation/CoreFoundation.h>
 #import "CommonMacro.h"
+#import "UIDevice+Addition.h"
 
 @implementation NSString (Addition)
 
@@ -74,7 +75,7 @@
 //判断是否包含sub字符串
 - (BOOL)isContainString:(NSString*)sub
 {
-    if (ios8AndUper)
+    if (kiOS8Later)
     {
         return [self containsString:sub];
     }

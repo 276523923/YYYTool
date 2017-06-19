@@ -10,6 +10,53 @@
 #define CommonMacro_h
 
 
+
+
+/**
+ Synthsize a weak or strong reference.
+ 
+ Example:
+ @weakify(self)
+ [self doSomething^{
+ @strongify(self)
+ if (!self) return;
+ ...
+ }];
+ 
+ */
+#ifndef weakify
+#if DEBUG
+#if __has_feature(objc_arc)
+#define weakify(object) @autoreleasepool{} __weak __typeof__(object) weak##_##object = object;
+#else
+#define weakify(object) @autoreleasepool{} __block __typeof__(object) block##_##object = object;
+#endif
+#else
+#if __has_feature(objc_arc)
+#define weakify(object) @try{} @finally{} {} __weak __typeof__(object) weak##_##object = object;
+#else
+#define weakify(object) @try{} @finally{} {} __block __typeof__(object) block##_##object = object;
+#endif
+#endif
+#endif
+
+#ifndef strongify
+#if DEBUG
+#if __has_feature(objc_arc)
+#define strongify(object) @autoreleasepool{} __typeof__(object) object = weak##_##object;
+#else
+#define strongify(object) @autoreleasepool{} __typeof__(object) object = block##_##object;
+#endif
+#else
+#if __has_feature(objc_arc)
+#define strongify(object) @try{} @finally{} __typeof__(object) object = weak##_##object;
+#else
+#define strongify(object) @try{} @finally{} __typeof__(object) object = block##_##object;
+#endif
+#endif
+#endif
+
+
 /**
  * 强弱引用转换，用于解决代码块（block）与强引用self之间的循环引用问题
  * 调用方式: `weakify_self`实现弱引用转换，`strongify_self`实现强引用转换
@@ -22,68 +69,15 @@
  * }];
  */
 #ifndef weakify_self
-#if __has_feature(objc_arc)
-#define weakify_self @autoreleasepool{} __weak __typeof__(self) weakSelf_ = self;
-#else
-#define weakify_self @autoreleasepool{} __block __typeof__(self) blockSelf_ = self;
-#endif
+#define weakify_self weakify(self);
 #endif
 
 #ifndef strongify_self
-#if __has_feature(objc_arc)
-#define strongify_self @try{} @finally{} __strong __typeof__(weakSelf_) self = weakSelf_;
-#else
-#define strongify_self @try{} @finally{} __typeof__(blockSelf_) self = blockSelf_;
-#endif
+#define strongify_self strongify(self);
 #endif
 
 
 #define OBJC_REQUIRES_SUPER  __attribute__((objc_requires_super))
-
-/**
- * ios10以上编译
- */
-#define ios10AndUper SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10")
-
-/**
- * ios9以上编译
- */
-#define ios9AndUper SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9")
-
-/**
- * ios8以上编译
- */
-#define ios8AndUper SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8")
-
-/**
- * ios7以上编译
- */
-#define ios7AndUper SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7")
-
-/**
- * sdk7及以上编译
- */
-#define SDK7AndUper (__IPHONE_OS_VERSION_MAX_ALLOWED >= 70000)
-
-/**
- *sdk8以上编译
- */
-#define SDK8AndUper (__IPHONE_OS_VERSION_MAX_ALLOWED >= 80000)
-
-/**
- *  方法宏定义
- */
-#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
-#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
-#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
-#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
-#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
-
-
-/**
- * HEX 美工给的颜色转换成程序的颜色
- */
-#define colorWithHEX(hex) ([UIColor colorWithHexString:hex])
 
 /**
  * HEXA 美工给的颜色转换成程序的颜色
@@ -91,51 +85,29 @@
 #define colorWithHEXA(hex,a) (UIColor colorWithHexString:hex alpha:a])
 
 /**
- * 美工给的字体像素高度转换成对应系统字体
- */
-#define systemFontWithPx(f) [UIFont systemFontOfSize:(f-2)/2]
-
-/**
- * 设置字体大小
- */
-//#define FONT(size)    [UIFont systemFontOfSize:iPhone6P?size+1:size]
-//#define BOLDFONT(size) [UIFont boldSystemFontOfSize:iPhone6P?size+1:size]
-
-/**
- *  (320, 480)的屏幕
- */
-#define iPhone3 CGSizeEqualToSize(CGSizeMake(320, 480), [[UIScreen mainScreen] currentMode].size)
-/**
- *  (640, 960)的屏幕
- */
-#define iPhone4 CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size)
-/**
- *  (640, 1136)的屏幕·
- */
-#define iPhone5 CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size)
-/**
- *  (750, 1334)的屏幕
- */
-#define iPhone6 CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size)
-/**
- *  (1242, 2208)的屏幕
- */
-#define iPhone6P CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size)
-
-//iphone6及以上手机
-#define iphone6AndUper ([[UIScreen mainScreen] currentMode].size.width > 640)
-
-/**
  * 设备屏幕大小,含状态栏
  */
+#ifndef kDeviceBoundsSize
 #define kDeviceBoundsSize [[UIScreen mainScreen] bounds].size
+#endif
+
+#ifndef kDeviceBoundsHeight
 #define kDeviceBoundsHeight [[UIScreen mainScreen] bounds].size.height
+#endif
+
+#ifndef kDeviceBoundsWidth
 #define kDeviceBoundsWidth [[UIScreen mainScreen] bounds].size.width
+#endif
 
 #define iPhone6RatioForWidth(value) kDeviceBoundsWidth / 375.f * value
 
+#ifndef kStatushHeight
 #define kStatushHeight 20
+#endif
+
+#ifndef kTabbarHeight
 #define kTabbarHeight 49
+#endif
 
 #ifdef DEBUG
 #define NSLog(FORMAT, ...) fprintf(stderr,"%s:%d\t%s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
@@ -157,7 +129,6 @@
  * RGB 美工给的颜色转换成程序的颜色
  */
 #define RGB(r, g, b) ([UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0])
-
 /**
  * RGBA 美工给的颜色转换成程序的颜色
  */

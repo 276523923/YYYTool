@@ -27,19 +27,6 @@
     }
 }
 
-- (void)addBordersOffset:(CGFloat)offset borderWidth:(CGFloat)width borderColor:(UIColor *)color {
-    CGRect frame = CGRectMake(-offset, -offset, self.frame.size.width + 2*offset , self.frame.size.height + 2*offset);
-    [self addBordersFrame:frame borderWidth:width borderColor:color];
-}
-
--(void)addBordersFrame:(CGRect)frame borderWidth:(CGFloat)width borderColor:(UIColor *)color {
-    CALayer * grayCover = [[CALayer alloc] initWithLayer:self.layer];
-    grayCover.frame = frame;
-    grayCover.borderWidth = width;
-    grayCover.borderColor = color.CGColor;
-    [self.layer addSublayer:grayCover];
-}
-
 - (void)setCircleImage:(BOOL)circleImage
 {
     objc_setAssociatedObject(self, @selector(circleImage), @(circleImage), OBJC_ASSOCIATION_RETAIN_NONATOMIC);

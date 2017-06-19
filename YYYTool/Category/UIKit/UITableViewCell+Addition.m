@@ -17,6 +17,8 @@ static CGFloat defaultCellHeight = 50.0f;
 @interface UITableViewCell ()
 
 @property (nonatomic, assign) BOOL needUpdate;
+@property (nonatomic) BOOL isSetBottomInsert;
+@property (nonatomic) BOOL isSetTopInsert;
 
 @end
 
@@ -40,6 +42,10 @@ static CGFloat defaultCellHeight = 50.0f;
 - (void)yyy_layoutSubviews
 {
     [self yyy_layoutSubviews];
+    if (self.isSelected)
+    {
+        return;
+    }
     if (self.needUpdate)
     {
         NSArray *targetViews = [self viewsOfClass:NSClassFromString(@"_UITableViewCellSeparatorView")];
@@ -67,7 +73,7 @@ static CGFloat defaultCellHeight = 50.0f;
                     continue;
                 }
                 
-                if (view.minY == 0)
+                if (view.minY == 0 && self.isSetTopInsert)
                 {
                     CGRect frame = CGRectZero;
                     frame.origin.x = self.topSeparatorInsert.left;
@@ -76,7 +82,7 @@ static CGFloat defaultCellHeight = 50.0f;
                     frame.size.height = view.frame.size.height;
                     view.frame = frame;
                 }
-                else
+                else if(view.minY > 0 && self.isSetBottomInsert)
                 {
                     CGRect frame = CGRectZero;
                     frame.origin.x = self.bottomSeparatorInsert.left;
@@ -117,7 +123,7 @@ static CGFloat defaultCellHeight = 50.0f;
 - (void)setZeroSeparatorInset:(BOOL)zeroSeparatorInset
 {
     self.topSeparatorInsert = UIEdgeInsetsZero;
-    self.bottomSeparatorInsert = UIEdgeInsetsZero;
+    self.bottomSeparatorInsert = UIEdgeInsetsMake(0, -1, 0, 0);
     objc_setAssociatedObject(self, @selector(zeroSeparatorInset), @(zeroSeparatorInset), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
@@ -134,6 +140,7 @@ static CGFloat defaultCellHeight = 50.0f;
 - (void)setTopSeparatorInsert:(UIEdgeInsets)topSeparatorInsert
 {
     self.needUpdate = YES;
+    self.isSetTopInsert = YES;
     objc_setAssociatedObject(self, @selector(topSeparatorInsert), [NSValue valueWithUIEdgeInsets:topSeparatorInsert], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
@@ -145,6 +152,7 @@ static CGFloat defaultCellHeight = 50.0f;
 - (void)setBottomSeparatorInsert:(UIEdgeInsets)bottomSeparatorInsert
 {
     self.needUpdate = YES;
+    self.isSetBottomInsert = YES;
     objc_setAssociatedObject(self, @selector(bottomSeparatorInsert), [NSValue valueWithUIEdgeInsets:bottomSeparatorInsert], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
@@ -167,6 +175,26 @@ static CGFloat defaultCellHeight = 50.0f;
 - (BOOL)hiddenBottomSeparatorWhenInLast
 {
     return [objc_getAssociatedObject(self, @selector(hiddenBottomSeparatorWhenInLast)) boolValue];
+}
+
+- (BOOL)isSetTopInsert
+{
+    return [objc_getAssociatedObject(self, @selector(isSetTopInsert)) boolValue];
+}
+
+- (void)setIsSetTopInsert:(BOOL)isSetTopInsert
+{
+    objc_setAssociatedObject(self, @selector(isSetTopInsert), @(isSetTopInsert), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)isSetBottomInsert
+{
+    return [objc_getAssociatedObject(self, @selector(isSetBottomInsert)) boolValue];
+}
+
+- (void)setIsSetBottomInsert:(BOOL)isSetBottomInsert
+{
+    objc_setAssociatedObject(self, @selector(isSetBottomInsert), @(isSetBottomInsert), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark - end -

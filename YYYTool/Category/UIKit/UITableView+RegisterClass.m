@@ -22,6 +22,9 @@ static const void * allCellReuseIdentifierKey = &allCellReuseIdentifierKey;
 
 - (void)registerClass:(Class)cellClass
 {
+    if (!cellClass) {
+        return;
+    }
     NSString *clsString = NSStringFromClass(cellClass);
     if ([self.allCellReuseIdentifier hasKey:clsString])
     {
@@ -42,12 +45,12 @@ static const void * allCellReuseIdentifierKey = &allCellReuseIdentifierKey;
 
 - (void)setAllCellReuseIdentifier:(NSDictionary *)allCellReuseIdentifier
 {
-    objc_setAssociatedObject(self, allCellReuseIdentifierKey, allCellReuseIdentifier, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(allCellReuseIdentifier), allCellReuseIdentifier, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (NSMutableDictionary *)allCellReuseIdentifier
 {
-    NSMutableDictionary *dic =objc_getAssociatedObject(self, allCellReuseIdentifierKey);
+    NSMutableDictionary *dic =objc_getAssociatedObject(self, @selector(allCellReuseIdentifier));
     if (!dic)
     {
         dic = [NSMutableDictionary dictionary];

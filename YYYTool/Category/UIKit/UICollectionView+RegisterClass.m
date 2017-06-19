@@ -10,8 +10,6 @@
 #import <objc/runtime.h>
 #import "NSDictionary+SafeAccess.h"
 
-static const void * allCellReuseIdentifierKey = &allCellReuseIdentifierKey;
-
 @interface UICollectionView ()
 
 @property (nonatomic, strong, readwrite) NSMutableDictionary *allCellReuseIdentifier;
@@ -22,6 +20,9 @@ static const void * allCellReuseIdentifierKey = &allCellReuseIdentifierKey;
 
 - (void)registerClass:(Class)cellClass
 {
+    if (!cellClass) {
+        return;
+    }
     if ([self.allCellReuseIdentifier hasKey:NSStringFromClass(cellClass)])
     {
         return;
@@ -41,12 +42,12 @@ static const void * allCellReuseIdentifierKey = &allCellReuseIdentifierKey;
 
 - (void)setAllCellReuseIdentifier:(NSMutableDictionary *)allCellReuseIdentifier
 {
-    objc_setAssociatedObject(self, allCellReuseIdentifierKey, allCellReuseIdentifier, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(allCellReuseIdentifier), allCellReuseIdentifier, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (NSMutableDictionary *)allCellReuseIdentifier
 {
-    NSMutableDictionary *dic =objc_getAssociatedObject(self, allCellReuseIdentifierKey);
+    NSMutableDictionary *dic =objc_getAssociatedObject(self, @selector(allCellReuseIdentifier));
     if (!dic)
     {
         dic = [NSMutableDictionary dictionary];

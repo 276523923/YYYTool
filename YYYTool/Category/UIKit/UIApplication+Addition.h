@@ -43,6 +43,4 @@
  */
 + (void)callPhoneWithNum:(NSString *)num;
 
-+ (NSInteger)getNetworkState;
-
 @end

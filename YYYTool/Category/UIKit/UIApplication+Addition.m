@@ -12,6 +12,7 @@
 #import <UserNotifications/UserNotifications.h>
 #import "CommonMacro.h"
 #import "NSString+Addition.h"
+#import "UIDevice+Addition.h"
 
 @implementation UIApplication (Addition)
 
@@ -36,23 +37,20 @@
 //注册push
 + (void)registerPush
 {
-    
-    if (ios10AndUper)
+    UIApplication *application = [UIApplication sharedApplication];
+
+    if (kiOS10Later)
     {
-//        [self registerNotification];
-        
         UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
         [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert) completionHandler:^(BOOL granted, NSError * _Nullable error) {
             if (!error) {
                 NSLog(@"succeeded!");
             }
         }];
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-        
+        [application registerForRemoteNotifications];
     }
     else
     {
-        UIApplication *application = [UIApplication sharedApplication];
         
         //-- Set Notification
         if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
@@ -130,10 +128,9 @@
     num = [num stringByDeletingString:@"-"];
     num = [num stringByDeletingString:@"－"];
     NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",num];
-    if (ios10AndUper)
+    if (kiOS10Later)
     {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str] options:nil completionHandler:nil];
-
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str] options:@{} completionHandler:nil];
     }
     else
     {
@@ -141,69 +138,5 @@
     }
 }
 
-+ (NSInteger)getNetworkState
-{
-    NSArray * array = [[[UIApplication sharedApplication] valueForKeyPath:@"statusBar.foregroundView"] subviews];
-    NSInteger networkType = 0;
-    for (id child in array)
-    {
-        if ([child isKindOfClass:NSClassFromString(@"UIStatusBarDataNetworkItemView")])
-        {
-            networkType = [[child valueForKeyPath:@"dataNetworkType"]intValue];
-        }
-    }
-    switch (networkType) {
-        case 1:
-            networkType = 2;
-            break;
-        case 2:
-            networkType = 3;
-            break;
-        case 3:
-            networkType = 4;
-            break;
-        case 5:
-            networkType = 1;
-            break;
-        default:
-            break;
-    }
-    return networkType;
-}
-
-+ (NSString *)getNewWorkStateString
-{
-    NSArray * array = [[[UIApplication sharedApplication] valueForKeyPath:@"statusBar.foregroundView"] subviews];
-    NSInteger networkType = 0;
-    for (id child in array)
-    {
-        if ([child isKindOfClass:NSClassFromString(@"UIStatusBarDataNetworkItemView")])
-        {
-            networkType = [[child valueForKeyPath:@"dataNetworkType"]intValue];
-        }
-    }
-    NSString * state = @"";
-    switch (networkType) {
-        case 0:
-            state = @"无网络";
-            //无网模式
-            break;
-        case 1:
-            state = @"2G";
-            break;
-        case 2:
-            state = @"3G";
-            break;
-        case 3:
-            state = @"4G";
-            break;
-        case 5:
-            state = @"WIFI";
-            break;
-        default:
-            break;
-    }
-    return state;
-}
 
 @end

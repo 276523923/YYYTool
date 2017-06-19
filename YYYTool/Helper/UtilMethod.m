@@ -8,7 +8,6 @@
 
 #import "UtilMethod.h"
 #import <objc/message.h>
-#import "CommonMacro.h"
 #import "NSDate+Helper.h"
 #import "UIDevice+Addition.h"
 
@@ -38,18 +37,6 @@ BOOL IsEmptyObj(id obj){
 
 BOOL NoEmptyObj(id obj){
     return !IsEmptyObj(obj);
-}
-
-BOOL NotEmptyArray(id array)
-{
-    if ([array isKindOfClass:[NSArray class]])
-    {
-        if ([(NSArray *)array count] > 0)
-        {
-            return YES;
-        }
-    }
-    return NO;
 }
 
 id DefaultObj(id obj,id defaultValue){
@@ -92,7 +79,7 @@ __attribute((overloadable)) NSString *StringObj(id obj){
 }
 
 __attribute((overloadable)) NSString *StringObj(id obj,NSString *defaultString){
-    if (IsEmptyObj(defaultString))
+    if (!defaultString || ![defaultString isKindOfClass:[NSString class]])
     {
         defaultString = @"";
     }
@@ -164,40 +151,4 @@ BOOL BOOLValue(id obj){
     return NO;
 }
 
-UIFont *FONT(CGFloat size){
-    return [UIFont systemFontOfSize:iPhone6P?size+1:size];
-}
 
-UIFont *BOLDFONT(CGFloat size){
-    return [UIFont boldSystemFontOfSize:iPhone6P?size+1:size];
-}
-
-CGFloat iPhone6AndUperValue(CGFloat iPhone6UpValue,CGFloat iPhone5Value){
-    return iPhoneFloatValue(iPhone5Value, iPhone6UpValue, iPhone6UpValue);
-}
-
-UIFont *LIGHTFONT(CGFloat size){
-    return  ios9AndUper? [UIFont fontWithName:@"PingFangSC-Light" size:iPhone6P?size+1:size]:FONT(size);
-}
-
-__attribute((overloadable)) CGFloat iPhoneFloatValue(CGFloat iPhone6UpValue,CGFloat iPhone5Value){
-    return iPhoneFloatValue(iPhone5Value, iPhone6UpValue, iPhone6UpValue);
-}
-
-__attribute((overloadable)) CGFloat iPhoneFloatValue(CGFloat iP5,CGFloat iP6,CGFloat iP6P){
-    return [iPhoneIDValue(@(iP5), @(iP6), @(iP6P)) doubleValue];
-}
-
-id iPhoneIDValue(id iP5,id iP6,id iP6P){
-    if (iPhone6) {
-        return iP6;
-    }
-    else if (iPhone6P)
-    {
-        return iP6P;
-    }
-    else
-    {
-        return iP5;
-    }
-}
