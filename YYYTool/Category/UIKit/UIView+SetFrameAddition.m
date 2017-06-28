@@ -11,6 +11,123 @@
 
 @implementation UIView (SetFrameAddition)
 
+
+- (CGFloat)f_left
+{
+    return self.frame.origin.x;
+}
+
+- (void)setF_left:(CGFloat)f_left
+{
+    CGRect frame = self.frame;
+    frame.origin.x = f_left;
+    self.frame = frame;
+}
+
+- (CGFloat)f_top
+{
+    return self.frame.origin.y;
+}
+
+- (void)setF_top:(CGFloat)y
+{
+    CGRect frame = self.frame;
+    frame.origin.y = y;
+    self.frame = frame;
+}
+
+- (CGFloat)f_right
+{
+    return self.frame.origin.x + self.frame.size.width;
+}
+
+- (void)setF_right:(CGFloat)f_right
+{
+    CGRect frame = self.frame;
+    frame.origin.x = f_right - frame.size.width;
+    self.frame = frame;
+}
+
+- (CGFloat)f_bottom
+{
+    return CGRectGetMaxY(self.frame);
+}
+
+- (void)setF_bottom:(CGFloat)f_bottom
+{
+    CGRect frame = self.frame;
+    frame.origin.y = f_bottom - frame.size.height;
+    self.frame = frame;
+}
+
+- (CGFloat)f_width
+{
+    return CGRectGetWidth(self.frame);
+}
+
+- (void)setF_width:(CGFloat)f_width
+{
+    CGRect frame = self.frame;
+    frame.size.width = f_width;
+    self.frame = frame;
+}
+
+- (CGFloat)f_height
+{
+    return CGRectGetHeight(self.frame);
+}
+
+- (void)setF_height:(CGFloat)f_height
+{
+    CGRect frame = self.frame;
+    frame.size.height = height;
+    self.frame = frame;
+}
+
+- (CGFloat)f_centerX
+{
+    return self.center.x;
+}
+
+- (void)setF_centerX:(CGFloat)f_centerX
+{
+    self.center = CGPointMake(f_centerX, self.center.y);
+}
+
+- (CGFloat)f_centerY
+{
+    return self.center.y;
+}
+
+- (void)setF_centerY:(CGFloat)f_centerY
+{
+    self.center = CGPointMake(self.center.x, f_centerY);
+}
+
+- (CGPoint)f_origin
+{
+    return self.frame.origin;
+}
+
+- (void)setF_origin:(CGPoint)origin
+{
+    CGRect frame = self.frame;
+    frame.origin = origin;
+    self.frame = frame;
+}
+
+- (CGSize)f_size
+{
+    return self.frame.size;
+}
+
+- (void)setF_size:(CGSize)size
+{
+    CGRect frame = self.frame;
+    frame.size = size;
+    self.frame = frame;
+}
+
 - (void)setX:(CGFloat)x
 {
     CGRect rect = self.frame;
