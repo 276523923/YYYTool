@@ -80,7 +80,7 @@
 - (void)setF_height:(CGFloat)f_height
 {
     CGRect frame = self.frame;
-    frame.size.height = height;
+    frame.size.height = f_height;
     self.frame = frame;
 }
 
