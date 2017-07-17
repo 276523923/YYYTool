@@ -23,7 +23,7 @@
     [self circleImage_layoutSubviews];
     if (self.circleImage)
     {
-        self.cornerRadius = MIN(self.fWidth, self.fHeight)/2;
+        self.cornerRadius = MIN(self.f_width, self.f_height)/2;
     }
 }
 

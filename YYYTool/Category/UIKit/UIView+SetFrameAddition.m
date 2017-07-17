@@ -199,7 +199,7 @@
 
 - (void)setMaxX:(CGFloat)maxX
 {
-    self.minX = maxX-self.fWidth;
+    self.minX = maxX-self.f_width;
 }
 
 - (void)setMinY:(CGFloat)minY
@@ -209,27 +209,7 @@
 
 - (void)setMaxY:(CGFloat)maxY
 {
-    self.minY = maxY-self.fHeight;
-}
-
-- (CGFloat)fHeight
-{
-    return CGRectGetHeight(self.frame);
-}
-
-- (CGFloat)fWidth
-{
-    return CGRectGetWidth(self.frame);
-}
-
-- (void)setFHeight:(CGFloat)fHeight
-{
-    [self setHeight:fHeight];
-}
-
-- (void)setFWidth:(CGFloat)fWidth
-{
-    [self setWidth:fWidth];
+    self.minY = maxY-self.f_height;
 }
 
 - (CGFloat)cornerRadius

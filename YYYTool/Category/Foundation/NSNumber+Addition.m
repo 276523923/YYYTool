@@ -18,7 +18,7 @@
     {
         for (NSInteger i = 0; i < digits; i++)
         {
-            format = [format stringByAppendingString:@"#"];
+            format = [format stringByAppendingString:@"0"];
         }
         format = [NSString stringWithFormat:@"0.%@;",format];
     }

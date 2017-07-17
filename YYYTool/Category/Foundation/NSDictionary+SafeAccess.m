@@ -10,7 +10,7 @@
 #import "NSObject+Addition.h"
 
 @implementation NSDictionary (SafeAccess)
-- (BOOL)hasKey:(NSString *)key
+- (BOOL)hasKey:(id)key
 {
     return [self objectForKey:key] != nil;
 }

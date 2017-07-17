@@ -178,7 +178,27 @@ static inline UIFont *BOLDFONT(CGFloat size){
 }
 
 static inline UIFont *LIGHTFONT(CGFloat size){
-    return kiOS9Later? [UIFont fontWithName:@"PingFangSC-Light" size:iPhone6P?size+1:size]:FONT(size);
+    static BOOL hasLightFont = NO;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        UIFont *font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
+        if (font) {
+            hasLightFont = YES;
+        }
+    });
+    return hasLightFont? [UIFont fontWithName:@"PingFangSC-Light" size:iPhone6P?size+1:size]:FONT(size);
+}
+
+static inline UIFont *REGULARFONT(CGFloat size){
+    static BOOL hasRegularFont = NO;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        UIFont *font = [UIFont fontWithName:@"PingFangSC-Regular" size:10];
+        if (font) {
+            hasRegularFont = YES;
+        }
+    });
+    return hasRegularFont?[UIFont fontWithName:@"PingFangSC-Regular" size:iPhone6P?size+1:size]:FONT(size);
 }
 
 /**

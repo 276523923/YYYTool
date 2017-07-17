@@ -28,10 +28,6 @@
 @property (nonatomic) CGFloat minY;
 @property (nonatomic) CGFloat maxY;
 
-//视图大小
-@property (nonatomic) CGFloat fHeight;
-@property (nonatomic) CGFloat fWidth;
-
 @property (nonatomic, assign) CGFloat cornerRadius;/**< 圆角 */
 
 @end

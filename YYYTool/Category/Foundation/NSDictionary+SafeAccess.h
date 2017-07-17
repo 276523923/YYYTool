@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 
 @interface NSDictionary (SafeAccess)
-- (BOOL)hasKey:(NSString *)key;
+- (BOOL)hasKey:(id)key;
 
 - (NSString*)stringForKey:(id)key;
 

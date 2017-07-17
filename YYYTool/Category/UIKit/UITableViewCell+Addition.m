@@ -53,7 +53,7 @@ static CGFloat defaultCellHeight = 50.0f;
         {
             if (self.hiddenSeparator)
             {
-                view.fWidth = 0;
+                view.f_width = 0;
                 view.hidden = YES;
                 continue;
             }
@@ -61,19 +61,19 @@ static CGFloat defaultCellHeight = 50.0f;
             {
                 if (self.hiddenTopSeparator && view.minY == 0)
                 {
-                    view.fWidth = 0;
+                    view.f_width = 0;
                     view.hidden = YES;
                     continue;
                 }
                 
                 if (self.hiddenBottomSeparatorWhenInLast && view.minX == 0 && view.minY > 0)
                 {
-                    view.fWidth = 0;
+                    view.f_width = 0;
                     view.hidden = YES;
                     continue;
                 }
                 
-                if (view.minY == 0 && self.isSetTopInsert)
+                if (view.f_top == 0 && self.isSetTopInsert)
                 {
                     CGRect frame = CGRectZero;
                     frame.origin.x = self.topSeparatorInsert.left;
@@ -82,7 +82,7 @@ static CGFloat defaultCellHeight = 50.0f;
                     frame.size.height = view.frame.size.height;
                     view.frame = frame;
                 }
-                else if(view.minY > 0 && self.isSetBottomInsert)
+                else if(view.f_top > 0 && self.isSetBottomInsert)
                 {
                     CGRect frame = CGRectZero;
                     frame.origin.x = self.bottomSeparatorInsert.left;
