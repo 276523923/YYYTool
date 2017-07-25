@@ -33,5 +33,14 @@
 - (NSString *)stringWithFormat:(NSString *)format;
 - (NSString *)dateString;
 - (NSString *)string;
+- (NSDate *)dateByAddingDays:(NSInteger)days;
 
+//返回该月的第一天
+- (NSDate *)beginningOfMonth;
+//返回周日的的开始时间
+- (NSDate *)beginningOfWeek;
+//该月的最后一天
+- (NSDate *)endOfMonth;
+
+- (NSInteger)numberOfDaysInMonth;
 @end

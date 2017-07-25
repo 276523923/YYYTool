@@ -230,7 +230,6 @@ static __attribute__((always_inline)) NSDate *YYY_NSDateFromString(NSString *str
     return [inputFormatter dateFromString:string];
 }
 
-
 - (NSString *)dateString
 {
     return [self stringWithFormat:@"yyyy-MM-dd"];
@@ -239,6 +238,31 @@ static __attribute__((always_inline)) NSDate *YYY_NSDateFromString(NSString *str
 - (NSString *)string
 {
     return [self stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
+}
+
+- (NSDate *)dateByAddingDays:(NSInteger)days {
+    NSTimeInterval aTimeInterval = [self timeIntervalSinceReferenceDate] + 86400 * days;
+    NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:aTimeInterval];
+    return newDate;
+}
+
+- (NSDate *)beginningOfMonth
+{
+    NSString *dateString = [NSString stringWithFormat:@"%@-01 00:00:00",[self stringWithFormat:@"yyyy-MM"]];
+    return [NSDate dateFromString:dateString];
+}
+
+- (NSDate *)endOfMonth
+{
+    NSString *dateString = [NSString stringWithFormat:@"%@-%@ 00:00:00",[self stringWithFormat:@"yyyy-MM"],@(self.numberOfDaysInMonth)];
+    return [NSDate dateFromString:dateString];
+}
+
+- (NSInteger)numberOfDaysInMonth
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSRange range = [calendar rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:self];
+    return range.length;
 }
 
 @end
