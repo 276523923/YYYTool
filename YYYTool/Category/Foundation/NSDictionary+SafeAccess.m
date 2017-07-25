@@ -12,7 +12,11 @@
 @implementation NSDictionary (SafeAccess)
 - (BOOL)hasKey:(id)key
 {
-    return [self objectForKey:key] != nil;
+    if (!key)
+    {
+        return NO;
+    }
+    return self[key] != nil;
 }
 
 - (NSString*)stringForKey:(id)key
