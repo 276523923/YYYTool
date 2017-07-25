@@ -37,8 +37,6 @@
 
 //返回该月的第一天
 - (NSDate *)beginningOfMonth;
-//返回周日的的开始时间
-- (NSDate *)beginningOfWeek;
 //该月的最后一天
 - (NSDate *)endOfMonth;
 

@@ -220,6 +220,14 @@ static __attribute__((always_inline)) NSDate *YYY_NSDateFromString(NSString *str
 }
 
 + (NSDate *)dateFromString:(NSString *)string withFormat:(NSString *)format{
+    if (!string)
+    {
+        return nil;
+    }
+    if (!format)
+    {
+        return YYY_NSDateFromString(string);
+    }
     static NSDateFormatter *inputFormatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -227,6 +235,7 @@ static __attribute__((always_inline)) NSDate *YYY_NSDateFromString(NSString *str
         inputFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
         inputFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
     });
+    [inputFormatter setDateFormat:format];
     return [inputFormatter dateFromString:string];
 }
 
