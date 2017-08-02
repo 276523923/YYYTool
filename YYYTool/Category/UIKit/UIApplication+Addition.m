@@ -9,10 +9,13 @@
 #import "UIApplication+Addition.h"
 #include <sys/param.h>
 #include <sys/mount.h>
-#import <UserNotifications/UserNotifications.h>
 #import "CommonMacro.h"
 #import "NSString+Addition.h"
 #import "UIDevice+Addition.h"
+
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+#import <UserNotifications/UserNotifications.h>
+#endif
 
 @implementation UIApplication (Addition)
 
@@ -34,44 +37,39 @@
     }
 }
 
-//注册push
-+ (void)registerPush
++ (void)registerPushWithNotificationCenterDelegate:(id)delegate
 {
+    
     UIApplication *application = [UIApplication sharedApplication];
-
     if (kiOS10Later)
     {
         UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-        [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        center.delegate = delegate;
+        UNAuthorizationOptions options = UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert;
+        [center requestAuthorizationWithOptions:options completionHandler:^(BOOL granted, NSError * _Nullable error) {
             if (!error) {
                 NSLog(@"succeeded!");
+                
+                [center getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
+                    NSLog(@"%@", settings);
+                }];
+                
+                [application registerForRemoteNotifications];
             }
         }];
-        [application registerForRemoteNotifications];
     }
     else
     {
-        
-        //-- Set Notification
-        if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
-        {
-            // iOS 8 Notifications
-            [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
-            
-            [application registerForRemoteNotifications];
-        }
-        else
-        {
-            // iOS < 8 Notifications
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-            [application registerForRemoteNotificationTypes:
-             (UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge |
-              UIRemoteNotificationTypeSound)];
-#pragma clang diagnostic pop
-            
-        }
+        // iOS 8 Notifications
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        [application registerForRemoteNotifications];
     }
+}
+
+//注册push
++ (void)registerPush
+{
+    [self registerPushWithNotificationCenterDelegate:nil];
 }
 
 /**

@@ -13,6 +13,7 @@
 #pragma -mark push methods
 + (BOOL)isPushRegistered;   //是否注册
 + (void)registerPush;       //注册push
++ (void)registerPushWithNotificationCenterDelegate:(id)delegate;
 
 /**
  *  应用名称
