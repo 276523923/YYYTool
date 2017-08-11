@@ -13,11 +13,6 @@
 
 @implementation UIImageView (Addition)
 
-+ (void)load
-{
-    [self swizzleSelector:@selector(layoutSubviews) swapSelector:@selector(circleImage_layoutSubviews)];
-}
-
 - (void)circleImage_layoutSubviews
 {
     [self circleImage_layoutSubviews];
@@ -29,6 +24,10 @@
 
 - (void)setCircleImage:(BOOL)circleImage
 {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [UIImageView swizzleSelector:@selector(layoutSubviews) swapSelector:@selector(circleImage_layoutSubviews)];
+    });
     objc_setAssociatedObject(self, @selector(circleImage), @(circleImage), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 

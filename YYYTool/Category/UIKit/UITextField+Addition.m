@@ -12,13 +12,6 @@
 
 @implementation UITextField (Addition)
 
-+ (void)load
-{
-    [self swizzleSelector:@selector(yyy_textRectForBounds:) swapSelector:@selector(textRectForBounds:)];
-    [self swizzleSelector:@selector(yyy_editingRectForBounds:) swapSelector:@selector(editingRectForBounds:)];
-    [self swizzleSelector:@selector(yyy_clearButtonRectForBounds:) swapSelector:@selector(clearButtonRectForBounds:)];
-}
-
 - (UILabel *)yyy_placeholderLabel
 {
     return [self valueForKey:@"_placeholderLabel"];
@@ -112,6 +105,14 @@
     {
         value = nil;
     }
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [UITextField swizzleSelector:@selector(yyy_textRectForBounds:) swapSelector:@selector(textRectForBounds:)];
+        [UITextField swizzleSelector:@selector(yyy_editingRectForBounds:) swapSelector:@selector(editingRectForBounds:)];
+        [UITextField swizzleSelector:@selector(yyy_clearButtonRectForBounds:) swapSelector:@selector(clearButtonRectForBounds:)];
+    });
+    
     objc_setAssociatedObject(self, @selector(textRectInsets), value, OBJC_ASSOCIATION_RETAIN);
 }
 

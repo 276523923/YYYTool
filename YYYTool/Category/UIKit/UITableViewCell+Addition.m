@@ -34,11 +34,6 @@ static CGFloat defaultCellHeight = 50.0f;
     return [self cellHeight];
 }
 
-+ (void)load
-{
-    [self swizzleSelector:@selector(layoutSubviews) swapSelector:@selector(yyy_layoutSubviews)];
-}
-
 - (void)yyy_layoutSubviews
 {
     [self yyy_layoutSubviews];
@@ -163,6 +158,10 @@ static CGFloat defaultCellHeight = 50.0f;
 
 - (void)setNeedUpdate:(BOOL)needUpdate
 {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [UITableViewCell swizzleSelector:@selector(layoutSubviews) swapSelector:@selector(yyy_layoutSubviews)];
+    });
     objc_setAssociatedObject(self, @selector(needUpdate), @(needUpdate), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 

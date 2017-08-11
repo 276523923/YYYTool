@@ -39,12 +39,6 @@
 
 @implementation UIViewController (AutoKeyBoardHidden)
 
-+ (void)load
-{
-    [self swizzleSelector:@selector(viewWillAppear:) swapSelector:@selector(yyy_keyboard_viewWillAppear:)];
-    [self swizzleSelector:@selector(viewWillDisappear:) swapSelector:@selector(yyy_keyboard_viewWillDisappear:)];
-}
-
 - (void)yyy_keyboard_viewWillAppear:(BOOL)animated
 {
     [self yyy_keyboard_viewWillAppear:animated];
@@ -99,6 +93,11 @@
 
 - (void)setAutoHiddenKeyBoardWhenTapView:(BOOL)autoHiddenKeyBoardWhenTapView
 {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [UIViewController swizzleSelector:@selector(viewWillAppear:) swapSelector:@selector(yyy_keyboard_viewWillAppear:)];
+        [UIViewController swizzleSelector:@selector(viewWillDisappear:) swapSelector:@selector(yyy_keyboard_viewWillDisappear:)];
+    });
     self.isRegisterKeyBoardNot = autoHiddenKeyBoardWhenTapView;
     objc_setAssociatedObject(self, @selector(autoHiddenKeyBoardWhenTapView), @(autoHiddenKeyBoardWhenTapView), OBJC_ASSOCIATION_RETAIN);
 }
