@@ -31,7 +31,7 @@ __attribute((overloadable)) id SEL_Exec(id target,SEL sel ,va_list argList)
     }
     if (methodSignature == nil)
     {
-#ifdef DEBUG
+#if DEBUG
         NSLog(@"target:%@ can't find sel:%@",target,NSStringFromSelector(sel));
 #endif
         return nil;

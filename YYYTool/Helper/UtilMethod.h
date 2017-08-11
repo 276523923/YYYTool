@@ -135,7 +135,7 @@ extern NSString *StringNum(id obj);
  */
 extern BOOL BOOLValue(id obj);
 
-
+extern void YYYBenchmark(void (^block)(void), void (^complete)(double ms));
 
 __attribute((overloadable)) static inline CGFloat iPhoneFloatValue(CGFloat iP5,CGFloat iP6,CGFloat iP6P){
     switch (YYYiPhoneModel())
@@ -214,5 +214,7 @@ static inline void dispatch_async_on_main_queue(void (^block)()) {
 static inline void dispatch_sync_on_main_queue(void (^block)()) {
     dispatch_sync(dispatch_get_main_queue(), block);
 }
+
+
 
 #endif /* UtilMethod_h */

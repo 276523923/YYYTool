@@ -25,7 +25,7 @@
     {
         return;
     }
-#ifdef DEBUG
+#if DEBUG
     NSLog(@"%@ swizzle SEL <-> %@  swap SEL:%@",NSStringFromClass(cls),NSStringFromSelector(origSelector),NSStringFromSelector(swapSelector));
 #endif
     method_exchangeImplementations(originalMethod, swapMethod);

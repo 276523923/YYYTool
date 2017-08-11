@@ -109,7 +109,7 @@
 #define kTabbarHeight 49
 #endif
 
-#ifdef DEBUG
+#if DEBUG
 #define NSLog(FORMAT, ...) fprintf(stderr,"%s:%d\t%s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
 #else
 #define NSLog(...)
@@ -122,8 +122,6 @@
  *  @param ...   要传的值
  */
 #define BLOCK_EXEC(block, ...) if (block) { block(__VA_ARGS__); };
-
-
 
 /**
  * RGB 美工给的颜色转换成程序的颜色

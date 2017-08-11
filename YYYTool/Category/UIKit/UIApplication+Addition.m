@@ -48,12 +48,6 @@
         UNAuthorizationOptions options = UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert;
         [center requestAuthorizationWithOptions:options completionHandler:^(BOOL granted, NSError * _Nullable error) {
             if (!error) {
-                NSLog(@"succeeded!");
-                
-                [center getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
-                    NSLog(@"%@", settings);
-                }];
-                
                 [application registerForRemoteNotifications];
             }
         }];

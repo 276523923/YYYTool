@@ -10,6 +10,7 @@
 #import <objc/message.h>
 #import "NSDate+Addition.h"
 #import "UIDevice+Addition.h"
+#import <sys/time.h>
 
 BOOL IsEmptyObj(id obj){
     if (obj == nil)
@@ -151,4 +152,11 @@ BOOL BOOLValue(id obj){
     return NO;
 }
 
-
+void YYYBenchmark(void (^block)(void), void (^complete)(double ms)) {
+    struct timeval t0, t1;
+    gettimeofday(&t0, NULL);
+    block();
+    gettimeofday(&t1, NULL);
+    double ms = (double)(t1.tv_sec - t0.tv_sec) * 1e3 + (double)(t1.tv_usec - t0.tv_usec) * 1e-3;
+    complete(ms);
+}
