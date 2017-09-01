@@ -215,6 +215,15 @@ static __attribute__((always_inline)) NSDate *YYY_NSDateFromString(NSString *str
     return [outputFormatter stringFromDate:self];
 }
 
++ (NSDate *)localeDate
+{
+    NSDate *date = [NSDate date];
+    NSTimeZone *zone = [NSTimeZone systemTimeZone];
+    NSInteger interval = [zone secondsFromGMTForDate:date];
+    NSDate *localeDate = [date  dateByAddingTimeInterval: interval];
+    return localeDate;
+}
+
 + (NSDate *)dateFromString:(NSString *)string {
     return YYY_NSDateFromString(string);
 }

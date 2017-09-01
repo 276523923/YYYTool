@@ -27,6 +27,8 @@
 @property (nonatomic, readonly) BOOL isLeapYear; ///< Weather the year is leap year
 @property (nonatomic, readonly) BOOL isToday; ///< Weather date is today (based on current locale)
 
+
++ (NSDate *)localeDate;
 + (NSDate *)dateFromString:(NSString *)string;
 + (NSDate *)dateFromString:(NSString *)string withFormat:(NSString *)format;
 
