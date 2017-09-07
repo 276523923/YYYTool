@@ -130,5 +130,19 @@
     }
 }
 
++ (void)jumpSystemSetting
+{
+    
+    NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+    if (kiOS10Later)
+    {
+        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+    }
+    else
+    {
+        [[UIApplication sharedApplication] openURL:url];
+    }
+}
+
 
 @end

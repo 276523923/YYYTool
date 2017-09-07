@@ -44,4 +44,6 @@
  */
 + (void)callPhoneWithNum:(NSString *)num;
 
++ (void)jumpSystemSetting;
+
 @end
