@@ -101,7 +101,7 @@ static CGFloat defaultCellHeight = 50.0f;
 
 - (BOOL)hiddenSeparator
 {
-    return [objc_getAssociatedObject(self, @selector(hiddenSeparator)) intValue];
+    return [objc_getAssociatedObject(self, @selector(hiddenSeparator)) boolValue];
 }
 
 - (void)setHiddenTopSeparator:(BOOL)hiddenTopSeparator
@@ -112,7 +112,7 @@ static CGFloat defaultCellHeight = 50.0f;
 
 - (BOOL)hiddenTopSeparator
 {
-    return [objc_getAssociatedObject(self, @selector(hiddenTopSeparator)) intValue];
+    return [objc_getAssociatedObject(self, @selector(hiddenTopSeparator)) boolValue];
 }
 
 - (void)setZeroSeparatorInset:(BOOL)zeroSeparatorInset
@@ -124,7 +124,7 @@ static CGFloat defaultCellHeight = 50.0f;
 
 - (BOOL)zeroSeparatorInset
 {
-    return [objc_getAssociatedObject(self, @selector(zeroSeparatorInset)) intValue];
+    return [objc_getAssociatedObject(self, @selector(zeroSeparatorInset)) boolValue];
 }
 
 - (UIEdgeInsets)topSeparatorInsert

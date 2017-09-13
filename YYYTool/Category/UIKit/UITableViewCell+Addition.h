@@ -11,7 +11,7 @@
 @interface UITableViewCell (Addition)
 
 @property (nonatomic, assign) BOOL hiddenSeparator; /**< 隐藏分割线 */
-@property (nonatomic, assign) BOOL hiddenTopSeparator; /**< 隐藏顶部分割线 */
+@property (nonatomic, assign) BOOL hiddenTopSeparator; /**< 隐藏顶部分割线，第一个Cell才有顶部分割线 */
 @property (nonatomic, assign) BOOL hiddenBottomSeparatorWhenInLast;/**< 最后一个Cell隐藏分割线 */
 @property (nonatomic, assign) BOOL zeroSeparatorInset; /**< 分割线无间隔 */
 
