@@ -9,9 +9,6 @@
 #ifndef CommonMacro_h
 #define CommonMacro_h
 
-
-
-
 /**
  Synthsize a weak or strong reference.
  
