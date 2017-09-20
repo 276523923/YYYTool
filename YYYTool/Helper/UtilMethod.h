@@ -12,41 +12,46 @@
 #import "UIDevice+Addition.h"
 
 typedef NS_ENUM(NSUInteger, iPhoneModel) {
-    kiPhoneModel_3,
-    kiPhoneModel_4,
-    kiPhoneModel_5,
-    kiPhoneModel_6,
-    kiPhoneModel_6P,
+    iPhoneModel_3,
+    iPhoneModel_4,
+    iPhoneModel_5,
+    iPhoneModel_6,
+    iPhoneModel_6P,
+    iPhoneModel_X,
 };
 
 static inline iPhoneModel YYYiPhoneModel(){
-    static iPhoneModel iPhoneModelValue = kiPhoneModel_6;
+    static iPhoneModel iPhoneModelValue = iPhoneModel_6;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         CGSize size = [[UIScreen mainScreen] currentMode].size;
         if (CGSizeEqualToSize(CGSizeMake(320, 480),size))
         {
-            iPhoneModelValue = kiPhoneModel_3;
+            iPhoneModelValue = iPhoneModel_3;
         }
         else if (CGSizeEqualToSize(CGSizeMake(640, 960),size))
         {
-            iPhoneModelValue = kiPhoneModel_4;
+            iPhoneModelValue = iPhoneModel_4;
         }
         else if (CGSizeEqualToSize(CGSizeMake(640, 1136),size))
         {
-            iPhoneModelValue = kiPhoneModel_5;
+            iPhoneModelValue = iPhoneModel_5;
         }
         else if (CGSizeEqualToSize(CGSizeMake(750, 1334),size))
         {
-            iPhoneModelValue = kiPhoneModel_6;
+            iPhoneModelValue = iPhoneModel_6;
         }
         else if (CGSizeEqualToSize(CGSizeMake(1242, 2208),size))
         {
-            iPhoneModelValue = kiPhoneModel_6P;
+            iPhoneModelValue = iPhoneModel_6P;
+        }
+        else if (CGSizeEqualToSize(CGSizeMake(1125, 2436), size))
+        {
+            iPhoneModelValue = iPhoneModel_X;
         }
         else
         {
-            iPhoneModelValue = kiPhoneModel_6;//默认6吧。
+            iPhoneModelValue = iPhoneModel_6;//默认6吧。
         }
     });
     return iPhoneModelValue;
@@ -56,43 +61,77 @@ static inline iPhoneModel YYYiPhoneModel(){
  *  (320, 480)的屏幕
  */
 static inline BOOL YYYiPhone3(){
-    return YYYiPhoneModel() == kiPhoneModel_3;
+    return YYYiPhoneModel() == iPhoneModel_3;
 }
 /**
  *  (640, 960)的屏幕
  */
 static inline BOOL YYYiPhone4(){
-    return YYYiPhoneModel() == kiPhoneModel_4;
+    return YYYiPhoneModel() == iPhoneModel_4;
 }
 /**
  *  (640, 1136)的屏幕·
  */
 static inline BOOL YYYiPhone5(){
-    return YYYiPhoneModel() == kiPhoneModel_5;
+    return YYYiPhoneModel() == iPhoneModel_5;
 }
 /**
  *  (750, 1334)的屏幕
  */
 static inline BOOL YYYiPhone6(){
-    return YYYiPhoneModel() == kiPhoneModel_6;
+    return YYYiPhoneModel() == iPhoneModel_6;
 }
 /**
  *  (1242, 2208)的屏幕
  */
 static inline BOOL YYYiPhone6P(){
-    return YYYiPhoneModel() == kiPhoneModel_6P;
+    return YYYiPhoneModel() == iPhoneModel_6P;
 }
 //iphone6及以上手机
 static inline BOOL YYYiphone6AndUper(){
-    return YYYiPhoneModel() >= kiPhoneModel_6;
+    return YYYiPhoneModel() >= iPhoneModel_6;
 }
 
+static inline BOOL YYYiPhoneX(){
+    return YYYiPhoneModel() == iPhoneModel_X;
+}
+
+
+static inline CGFloat YYYTabbarHeight(){
+    return YYYiPhoneX()? 83.f:49.f;
+}
+
+static inline CGFloat YYYStatushBarHeight(){
+    return YYYiPhoneX()? 44.f:20.f;
+}
+
+#ifndef iPhone3
 #define iPhone3 YYYiPhone3()
+#endif
+
+#ifndef iPhone4
 #define iPhone4 YYYiPhone4()
+#endif
+
+#ifndef iPhone5
 #define iPhone5 YYYiPhone5()
+#endif
+
+#ifndef iPhone6
 #define iPhone6 YYYiPhone6()
+#endif
+
+#ifndef iPhone6P
 #define iPhone6P YYYiPhone6P()
+#endif
+
+#ifndef iphone6AndUper
 #define iphone6AndUper YYYiphone6AndUper()
+#endif
+
+#ifndef iPhoneX
+#define iPhoneX YYYiPhoneX()
+#endif
 
 /**
  判断是否为空对象,NSNull,NSArray count = 0,NSDictionary count = 0,NSString length = 0,都为空
@@ -140,11 +179,11 @@ extern void YYYBenchmark(void (^block)(void), void (^complete)(double ms));
 __attribute((overloadable)) static inline CGFloat iPhoneFloatValue(CGFloat iP5,CGFloat iP6,CGFloat iP6P){
     switch (YYYiPhoneModel())
     {
-        case kiPhoneModel_5:
+        case iPhoneModel_5:
             return iP5;
-        case kiPhoneModel_6:
+        case iPhoneModel_6:
             return iP6;
-        case kiPhoneModel_6P:
+        case iPhoneModel_6P:
             return iP6P;
         default:
             return iP6;
@@ -158,11 +197,11 @@ __attribute((overloadable)) static inline CGFloat iPhoneFloatValue(CGFloat iP5,C
 static inline id iPhoneIDValue(id iP5,id iP6,id iP6P){
     switch (YYYiPhoneModel())
     {
-        case kiPhoneModel_5:
+        case iPhoneModel_5:
             return iP5;
-        case kiPhoneModel_6:
+        case iPhoneModel_6:
             return iP6;
-        case kiPhoneModel_6P:
+        case iPhoneModel_6P:
             return iP6P;
         default:
             return iP6;

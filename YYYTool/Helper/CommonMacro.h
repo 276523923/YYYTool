@@ -102,11 +102,15 @@
 #define iPhone6RatioForWidth(value) kDeviceBoundsWidth / 375.f * value
 
 #ifndef kStatushHeight
-#define kStatushHeight 20
+#define kStatushHeight YYYStatushBarHeight()
 #endif
 
 #ifndef kTabbarHeight
-#define kTabbarHeight 49
+#define kTabbarHeight YYYTabbarHeight()
+#endif
+
+#ifndef kNavigationBarHeight
+#define kNavigationBarHeight 44
 #endif
 
 #if DEBUG
