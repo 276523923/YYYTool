@@ -19,16 +19,26 @@
 + (void)swizzleSelector:(SEL)origSelector swapSelector:(SEL)swapSelector
 {
     Class cls = [self class];
-    Method originalMethod = class_getInstanceMethod(cls, origSelector);
-    Method swapMethod = class_getInstanceMethod(cls, swapSelector);
-    if (!originalMethod || !swapSelector)
-    {
-        return;
-    }
+    Method originalMethod = class_getInstanceMethod(self, origSelector);
+    Method newMethod = class_getInstanceMethod(self, swapSelector);
+    if (!originalMethod || !newMethod) return;
+    
 #if DEBUG
     NSLog(@"%@ swizzle SEL <-> %@  swap SEL:%@",NSStringFromClass(cls),NSStringFromSelector(origSelector),NSStringFromSelector(swapSelector));
 #endif
-    method_exchangeImplementations(originalMethod, swapMethod);
+    
+    class_addMethod(self,
+                    origSelector,
+                    class_getMethodImplementation(self, origSelector),
+                    method_getTypeEncoding(originalMethod));
+    
+    class_addMethod(self,
+                    swapSelector,
+                    class_getMethodImplementation(self, swapSelector),
+                    method_getTypeEncoding(newMethod));
+    
+    method_exchangeImplementations(class_getInstanceMethod(self, origSelector),
+                                   class_getInstanceMethod(self, swapSelector));
 }
 
 + (BOOL)classMethodRespondsToSelector:(SEL)aSelector
