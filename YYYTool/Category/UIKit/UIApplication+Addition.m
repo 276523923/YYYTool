@@ -48,9 +48,15 @@
         UNAuthorizationOptions options = UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert;
         [center requestAuthorizationWithOptions:options completionHandler:^(BOOL granted, NSError * _Nullable error) {
             if (!error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
+                if ([NSThread isMainThread])
+                {
                     [application registerForRemoteNotifications];
-                });
+                }
+                else
+                {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                    });
+                }
             }
         }];
     }
