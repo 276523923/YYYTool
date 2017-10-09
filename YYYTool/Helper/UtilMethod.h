@@ -24,35 +24,43 @@ static inline iPhoneModel YYYiPhoneModel(){
     static iPhoneModel iPhoneModelValue = iPhoneModel_6;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        CGSize size = [[UIScreen mainScreen] currentMode].size;
-        if (CGSizeEqualToSize(CGSizeMake(320, 480),size))
-        {
-            iPhoneModelValue = iPhoneModel_3;
-        }
-        else if (CGSizeEqualToSize(CGSizeMake(640, 960),size))
-        {
-            iPhoneModelValue = iPhoneModel_4;
-        }
-        else if (CGSizeEqualToSize(CGSizeMake(640, 1136),size))
-        {
-            iPhoneModelValue = iPhoneModel_5;
-        }
-        else if (CGSizeEqualToSize(CGSizeMake(750, 1334),size))
-        {
-            iPhoneModelValue = iPhoneModel_6;
-        }
-        else if (CGSizeEqualToSize(CGSizeMake(1242, 2208),size))
-        {
-            iPhoneModelValue = iPhoneModel_6P;
-        }
-        else if (CGSizeEqualToSize(CGSizeMake(1125, 2436), size))
+        if ([[UIDevice currentDevice].machineModelName isEqualToString:@"iPhone X"])
         {
             iPhoneModelValue = iPhoneModel_X;
         }
         else
         {
-            iPhoneModelValue = iPhoneModel_6;//默认6吧。
+            CGSize size = [[UIScreen mainScreen] currentMode].size;
+            if (CGSizeEqualToSize(CGSizeMake(320, 480),size))
+            {
+                iPhoneModelValue = iPhoneModel_3;
+            }
+            else if (CGSizeEqualToSize(CGSizeMake(640, 960),size))
+            {
+                iPhoneModelValue = iPhoneModel_4;
+            }
+            else if (CGSizeEqualToSize(CGSizeMake(640, 1136),size))
+            {
+                iPhoneModelValue = iPhoneModel_5;
+            }
+            else if (CGSizeEqualToSize(CGSizeMake(750, 1334),size))
+            {
+                iPhoneModelValue = iPhoneModel_6;
+            }
+            else if (CGSizeEqualToSize(CGSizeMake(1242, 2208),size))
+            {
+                iPhoneModelValue = iPhoneModel_6P;
+            }
+            else if (CGSizeEqualToSize(CGSizeMake(1125, 2436), size))
+            {
+                iPhoneModelValue = iPhoneModel_X;
+            }
+            else
+            {
+                iPhoneModelValue = iPhoneModel_6;//默认6吧。
+            }
         }
+        
     });
     return iPhoneModelValue;
 }

@@ -68,6 +68,12 @@
                               @"iPhone9,2" : @"iPhone 7 Plus",
                               @"iPhone9,3" : @"iPhone 7",
                               @"iPhone9,4" : @"iPhone 7 Plus",
+                              @"iPhone10,1": @"iPhone 8",
+                              @"iPhone10,4": @"iPhone 8",
+                              @"iPhone10,2": @"iPhone 8 Plus",
+                              @"iPhone10,5": @"iPhone 8 Plus",
+                              @"iPhone10,3": @"iPhone X",
+                              @"iPhone10,6": @"iPhone X",
                               
                               @"iPad1,1" : @"iPad 1",
                               @"iPad2,1" : @"iPad 2 (WiFi)",
@@ -105,7 +111,6 @@
                               @"iPad7,3" : @"iPad Pro (10.5-inch)",
                               @"iPad7,4" : @"iPad Pro (10.5-inch)",
 
-                              
                               @"AppleTV2,1" : @"Apple TV 2",
                               @"AppleTV3,1" : @"Apple TV 3",
                               @"AppleTV3,2" : @"Apple TV 3",
