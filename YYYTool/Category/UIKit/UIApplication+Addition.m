@@ -41,7 +41,7 @@
 {
     
     UIApplication *application = [UIApplication sharedApplication];
-    if (kiOS10Later)
+    if (@available(iOS 10, *))
     {
         UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
         center.delegate = delegate;
@@ -129,7 +129,7 @@
     num = [num stringByDeletingString:@"-"];
     num = [num stringByDeletingString:@"－"];
     NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",num];
-    if (kiOS10Later)
+    if (@available(iOS 10, *))
     {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str] options:@{} completionHandler:nil];
     }
@@ -143,7 +143,7 @@
 {
     
     NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-    if (kiOS10Later)
+    if (@available(iOS 10, *))
     {
         [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
     }

@@ -75,7 +75,7 @@
 //判断是否包含sub字符串
 - (BOOL)isContainString:(NSString*)sub
 {
-    if (kiOS8Later)
+    if (@available(iOS 8, *))
     {
         return [self containsString:sub];
     }
