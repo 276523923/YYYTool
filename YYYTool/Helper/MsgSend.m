@@ -147,42 +147,42 @@ __attribute((overloadable)) id SEL_Exec(id target,SEL sel ,va_list argList)
         return returnValue;
     } else if (strcmp(returnType, @encode(CGRect)) == 0) {
         CGRect result;
-        [invocation getReturnValue:&result];\
+        [invocation getReturnValue:&result];
         NSValue * returnValue = [NSValue valueWithBytes:&(result) objCType:@encode(CGRect)];
         return returnValue;
     } else if (strcmp(returnType, @encode(CGPoint)) == 0) {
         CGPoint result;
-        [invocation getReturnValue:&result];\
+        [invocation getReturnValue:&result];
         NSValue * returnValue = [NSValue valueWithBytes:&(result) objCType:@encode(CGPoint)];
         return returnValue;
     } else if (strcmp(returnType, @encode(CGSize)) == 0) {
         CGSize result;
-        [invocation getReturnValue:&result];\
+        [invocation getReturnValue:&result];
         NSValue * returnValue = [NSValue valueWithBytes:&(result) objCType:@encode(CGSize)];
         return returnValue;
     } else if (strcmp(returnType, @encode(NSRange)) == 0) {
         NSRange result;
-        [invocation getReturnValue:&result];\
+        [invocation getReturnValue:&result];
         NSValue * returnValue = [NSValue valueWithBytes:&(result) objCType:@encode(NSRange)];
         return returnValue;
     } else if (strcmp(returnType, @encode(CGAffineTransform)) == 0) {
         CGAffineTransform result;
-        [invocation getReturnValue:&result];\
+        [invocation getReturnValue:&result];
         NSValue * returnValue = [NSValue valueWithBytes:&(result) objCType:@encode(CGAffineTransform)];
         return returnValue;
     } else if (strcmp(returnType, @encode(UIEdgeInsets)) == 0) {
         UIEdgeInsets result;
-        [invocation getReturnValue:&result];\
+        [invocation getReturnValue:&result];
         NSValue * returnValue = [NSValue valueWithBytes:&(result) objCType:@encode(UIEdgeInsets)];
         return returnValue;
     } else if (strcmp(returnType, @encode(UIOffset)) == 0) {
         UIOffset result;
-        [invocation getReturnValue:&result];\
+        [invocation getReturnValue:&result];
         NSValue * returnValue = [NSValue valueWithBytes:&(result) objCType:@encode(UIOffset)];
         return returnValue;
     } else if (strcmp(returnType, @encode(CGVector)) == 0) {
         CGVector result;
-        [invocation getReturnValue:&result];\
+        [invocation getReturnValue:&result];
         NSValue * returnValue = [NSValue valueWithBytes:&(result) objCType:@encode(CGVector)];
         return returnValue;
     } else if (strcmp(returnType, @encode(double)) == 0) {
